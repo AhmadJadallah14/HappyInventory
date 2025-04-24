@@ -1,0 +1,12 @@
+﻿# Ignore build outputs
+bin/
+obj/
+
+# Ignore Visual Studio specific files
+.vs/
+*.user
+*.suo
+
+# Ignore other common files
+*.log
+*.tmp

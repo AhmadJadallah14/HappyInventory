@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyInventory.API", "HappyInventory.API\HappyInventory.API.csproj", "{7483A33B-42D7-4EE1-9E37-57596F3A88FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyInventory.Models", "HappyInventory.Models\HappyInventory.Models.csproj", "{634AE63B-FFBC-4A56-B4F3-D4D3F435EFE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyInventory.Data", "HappyInventory.Data\HappyInventory.Data.csproj", "{13AAD1B4-BCB9-4028-8CCC-CD2627C6DA9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyInventory.Services", "HappyInventory.Services\HappyInventory.Services.csproj", "{4AB12CCB-29F1-49CB-B993-25205B4F5C7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyInventory.Helpers", "HappyInventory.Helpers\HappyInventory.Helpers.csproj", "{253A82E7-2B9E-4933-A421-ED6873A66264}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7483A33B-42D7-4EE1-9E37-57596F3A88FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7483A33B-42D7-4EE1-9E37-57596F3A88FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7483A33B-42D7-4EE1-9E37-57596F3A88FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7483A33B-42D7-4EE1-9E37-57596F3A88FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634AE63B-FFBC-4A56-B4F3-D4D3F435EFE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634AE63B-FFBC-4A56-B4F3-D4D3F435EFE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634AE63B-FFBC-4A56-B4F3-D4D3F435EFE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634AE63B-FFBC-4A56-B4F3-D4D3F435EFE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13AAD1B4-BCB9-4028-8CCC-CD2627C6DA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13AAD1B4-BCB9-4028-8CCC-CD2627C6DA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13AAD1B4-BCB9-4028-8CCC-CD2627C6DA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13AAD1B4-BCB9-4028-8CCC-CD2627C6DA9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB12CCB-29F1-49CB-B993-25205B4F5C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB12CCB-29F1-49CB-B993-25205B4F5C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB12CCB-29F1-49CB-B993-25205B4F5C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB12CCB-29F1-49CB-B993-25205B4F5C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{253A82E7-2B9E-4933-A421-ED6873A66264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{253A82E7-2B9E-4933-A421-ED6873A66264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{253A82E7-2B9E-4933-A421-ED6873A66264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{253A82E7-2B9E-4933-A421-ED6873A66264}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
