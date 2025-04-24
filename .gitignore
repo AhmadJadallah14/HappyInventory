@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/HappyInventory.API
+/HappyInventory.Data/bin/Debug/net6.0
+/HappyInventory.Data/obj
+/HappyInventory.Helpers/bin/Debug/net6.0
+/HappyInventory.Helpers/obj
+/HappyInventory.Models/bin/Debug/net6.0
+/HappyInventory.Models/obj
+/HappyInventory.Services/bin/Debug/net6.0
+/HappyInventory.Services/obj
