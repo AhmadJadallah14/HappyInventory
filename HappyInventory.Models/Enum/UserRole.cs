@@ -1,9 +1,9 @@
-﻿namespace HappyInventory.Helpers.Enum
+﻿namespace HappyInventory.Models.Enum
 {
     public enum UserRole
     {
-        Admin,
-        Management,
-        Auditor
+        Admin =1,
+        Management =2,
+        Auditor = 3
     }
 }

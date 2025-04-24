@@ -13,5 +13,6 @@
         public const string ErrorInvalidRefreshToken = "Invalid refresh token.";
         public const string ErrorUserNotFound = "User not found.";
         public const string ErrorFailedToCreateUser = "Failed to create user.";
+        public const string UserAlreadyExist = "User Already Exist";
     }
 }
