@@ -1,4 +1,5 @@
 ﻿using HappyInventory.Data.Repositories;
+using HappyInventory.Helpers.Logging;
 using HappyInventory.Models.Models.Identity;
 using HappyInventory.Services.JwtService;
 using HappyInventory.Services.JwtService.Interface;
@@ -7,8 +8,11 @@ using HappyInventory.Services.UserService.SeedData;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog.Events;
+using Serilog;
 using System.Reflection;
 using System.Text;
+using HappyInventory.Services.LogService;
 
 namespace HappyInventory.API.Configuration
 {
@@ -20,6 +24,8 @@ namespace HappyInventory.API.Configuration
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserSeeder, UserSeeder>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddSingleton<ILogsService, LogsService>();
+
             return services;
         }
 
@@ -72,6 +78,11 @@ namespace HappyInventory.API.Configuration
                     }
                 });
             });
+        }
+
+        public static void AddInMemoryLogging(this IServiceCollection services)
+        {
+            services.AddMemoryCache();
         }
 
     }

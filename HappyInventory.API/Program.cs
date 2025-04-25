@@ -1,6 +1,7 @@
 using AutoMapper;
 using HappyInventory.API.Configuration;
 using HappyInventory.Data.Context;
+using HappyInventory.Helpers.Middleware;
 using HappyInventory.Models.Mapper;
 using HappyInventory.Services.UserService.SeedData;
 using Microsoft.EntityFrameworkCore;
@@ -13,15 +14,14 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
     .Build();
 
+builder.Services.AddApplicationServices();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfiguration();
-builder.Services.AddApplicationServices();
+builder.Services.AddInMemoryLogging();
+builder.Services.AddLogging();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-
-
-
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -40,9 +40,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<LoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
-app.MapControllers();  
+app.MapControllers();
 
 app.Run();

@@ -65,7 +65,7 @@ namespace HappyInventory.Services.UserService
                 return new ApiResponse<string>(false, null, ResponseMessages.UserAlreadyExist,
                     null, HttpStatusCode.BadRequest);
 
-            if (EmailValidation.IsValidEmail(dto.Email))
+            if (!EmailValidation.IsValidEmail(dto.Email))
                 return new ApiResponse<string>(false, null, ResponseMessages.InvalidEmailFormat,
                     null, HttpStatusCode.BadRequest);
 

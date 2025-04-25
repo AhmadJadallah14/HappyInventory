@@ -19,6 +19,7 @@ namespace HappyInventory.Helpers.AppConstant
         public const string ErrorUserNotFound = "User not found";
         public const string ErrorFailedToCreateUser = "Failed to create user";
         public const string UserAlreadyExist = "User Already Exist";
+        public const string InternalServerError = "Internal Server Error";
 
 
         // Other messages
