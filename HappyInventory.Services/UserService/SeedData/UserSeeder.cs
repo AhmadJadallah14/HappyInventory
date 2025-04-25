@@ -1,6 +1,6 @@
 ﻿using HappyInventory.Data.Context;
+using HappyInventory.Helpers.Enum;
 using HappyInventory.Helpers.Helper;
-using HappyInventory.Models.Enum;
 using HappyInventory.Models.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 

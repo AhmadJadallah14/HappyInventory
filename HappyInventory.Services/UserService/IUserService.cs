@@ -1,5 +1,4 @@
 ﻿using HappyInventory.Models.DTOs.User;
-using HappyInventory.Models.Enum;
 using HappyInventory.Models.Response;
 
 namespace HappyInventory.Services.UserService
@@ -9,6 +8,9 @@ namespace HappyInventory.Services.UserService
         Task<ApiResponse<string>> CreateNewUser(NewUserDto dto);
         Task<ApiResponse<List<UserDto>>> GetAllUsersAsync();
         Task<ApiResponse<UserDto>> GetUserByIdAsync(int id);
-        Task<ApiResponse<string>> LoginAsync(string email, string password);
+        Task<ApiResponse<string>> LoginAsync(LoginDto loginDto);
+        Task<ApiResponse<string>> EditUser(UpdateUserDto dto);
+        Task<ApiResponse<string>> DeleteUser(int userId);
+        Task<ApiResponse<string>> ChangePassword(ChangePasswordDto dto);
     }
 }

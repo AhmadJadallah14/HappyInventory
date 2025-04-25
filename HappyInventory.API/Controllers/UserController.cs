@@ -1,4 +1,5 @@
-﻿using HappyInventory.Models.DTOs.User;
+﻿using HappyInventory.Helpers.Enum;
+using HappyInventory.Models.DTOs.User;
 using HappyInventory.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,14 +22,14 @@ namespace HappyInventory.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            var result = await _userService.LoginAsync(loginDto.Email, loginDto.Password);
+            var result = await _userService.LoginAsync(loginDto);
 
             return result.StatusCode == HttpStatusCode.OK
                 ? Ok(result)
                 : StatusCode((int)result.StatusCode, result);
         }
         [HttpPost("create-new-user")]
-        [Authorize(Roles = "Admin,Management")]
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Management)}")]
         public async Task<IActionResult> CreateNewUser([FromBody] NewUserDto newUserDto)
         {
             var result = await _userService.CreateNewUser(newUserDto);
@@ -39,7 +40,7 @@ namespace HappyInventory.API.Controllers
         }
 
         [HttpGet("get-user-by-id/{id}")]
-        [Authorize(Roles = "Admin,Management")]
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Management)}")]
         public async Task<IActionResult> GetUserById(int id)
         {
             var result = await _userService.GetUserByIdAsync(id);
@@ -50,7 +51,7 @@ namespace HappyInventory.API.Controllers
         }
 
         [HttpGet("get-all-users")]
-        [Authorize(Roles = "Admin,Management")]
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Management)}")]
         public async Task<IActionResult> GetAllUsers()
         {
             var result = await _userService.GetAllUsersAsync();
@@ -59,16 +60,40 @@ namespace HappyInventory.API.Controllers
               ? Ok(result)
               : StatusCode((int)result.StatusCode, result);
         }
-        //[HttpPut("UpdateUser/{id}")]
-        //[Authorize(Roles = "Admin")] 
-        //public async Task<IActionResult> UpdateUser(int id, [FromBody] NewUserDto newUserDto)
-        //{
-        //    var result = await _userService.ed(id, updateUserDto);
-        //    if (result.Success)
-        //        return HandleSuccess(result.Data, "User updated successfully", HttpStatusCode.OK);
 
-        //    return HandleError<string>("Error updating user", HttpStatusCode.BadRequest);
-        //}
+        [HttpPut("edit-user")]
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Management)}")]
+        public async Task<IActionResult> EditUser([FromBody] UpdateUserDto updateUserDto)
+        {
+            var result = await _userService.EditUser(updateUserDto);
+
+            return result.StatusCode == HttpStatusCode.OK
+                ? Ok(result)
+                : StatusCode((int)result.StatusCode, result);
+        }
+
+        [HttpDelete("delete-user/{userId}")]
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Management)}")]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            var result = await _userService.DeleteUser(userId);
+
+            return result.StatusCode == HttpStatusCode.OK
+                ? Ok(result)
+                : StatusCode((int)result.StatusCode, result);
+        }
+        [HttpPatch("change-password")]
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Management)}")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto dto)
+        {
+            var result = await _userService.ChangePassword(dto);
+
+            return result.StatusCode == HttpStatusCode.OK
+                ? Ok(result)
+                : StatusCode((int)result.StatusCode, result);
+        }
+
+
     }
 }
 

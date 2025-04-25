@@ -1,4 +1,4 @@
-﻿using HappyInventory.Models.Enum;
+﻿using HappyInventory.Helpers.Enum;
 
 namespace HappyInventory.Models.DTOs.User
 {

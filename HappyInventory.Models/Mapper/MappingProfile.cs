@@ -18,7 +18,20 @@ namespace HappyInventory.Models.Mapper
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive))
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role)).ReverseMap();
+
+
+            CreateMap<User, NewUserDto>()
+           .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+           .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
+           .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive))
+           .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role)).ReverseMap();
+
+            CreateMap<UpdateUserDto, User>()
+           .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+           .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
+           .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive))
+           .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role)).ReverseMap();
         }
     }
 }

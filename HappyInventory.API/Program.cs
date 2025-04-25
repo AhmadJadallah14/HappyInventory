@@ -3,11 +3,7 @@ using HappyInventory.API.Configuration;
 using HappyInventory.Data.Context;
 using HappyInventory.Models.Mapper;
 using HappyInventory.Services.UserService.SeedData;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -17,11 +13,8 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
     .Build();
 
-builder.Services.AddEndpointsApiExplorer();
-
-
-
 builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfiguration();
 builder.Services.AddApplicationServices();
 
@@ -42,7 +35,6 @@ using (var scope = app.Services.CreateScope())
     var userSeeder = services.GetRequiredService<IUserSeeder>();
     await userSeeder.SeedDefaultUserAsync();
 }
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -51,6 +43,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
-app.MapControllers();  // Ensure this line is present to map the controllers
+app.MapControllers();  
 
 app.Run();
