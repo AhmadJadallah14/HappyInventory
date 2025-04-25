@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using HappyInventory.Models.DTOs.Logging;
 using HappyInventory.Models.DTOs.User;
+using HappyInventory.Models.DTOs.Warehouse;
 using HappyInventory.Models.Models.Identity;
+using HappyInventory.Models.Models.Warehouses;
 using Serilog.Events;
 using System;
 using System.Collections.Generic;
@@ -34,11 +36,17 @@ namespace HappyInventory.Models.Mapper
            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive))
            .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role)).ReverseMap();
 
-            CreateMap<LogEvent, LogDto>()
+           CreateMap<LogEvent, LogDto>()
                  .ForMember(dest => dest.Timestamp, opt => opt.MapFrom(src => src.Timestamp))
                  .ForMember(dest => dest.Level, opt => opt.MapFrom(src => Convert.ToString(src.Level)))
                  .ForMember(dest => dest.Exception, opt => opt.MapFrom(src => Convert.ToString(src.Exception)))
                  .AfterMap((src, dest) => dest.Message = src.RenderMessage());
+
+            CreateMap<WarehouseDto, Warehouse>()
+                .ForMember(dest => dest.CountryId, opt => opt.MapFrom(src => src.CountryId))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City)).ReverseMap();
         }
     }
 }

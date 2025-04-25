@@ -7,8 +7,10 @@ using HappyInventory.Models.DTOs.User;
 using HappyInventory.Models.Models.Identity;
 using HappyInventory.Models.Response;
 using HappyInventory.Services.JwtService.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Security.Claims;
 
 namespace HappyInventory.Services.UserService
 {
@@ -17,14 +19,19 @@ namespace HappyInventory.Services.UserService
         private readonly ApplicationDbContext _context;
         private readonly IJwtService _jwtService;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(ApplicationDbContext context,
+        public UserService(
+            ApplicationDbContext context,
             IJwtService jwtService,
-            IMapper mapper)
+            IMapper mapper ,
+            IHttpContextAccessor httpContextAccessor
+            )
         {
             _context = context;
             _jwtService = jwtService;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ApiResponse<string>> LoginAsync(LoginDto loginDto)
@@ -174,7 +181,27 @@ namespace HappyInventory.Services.UserService
             string hashedPassword = Encryption.HashPassword(password);
             return storedHash.Equals(hashedPassword);
         }
+        public string GetCurrentUserEmail()
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
 
+            if (user == null || !user.Identity.IsAuthenticated)
+                return null;
+
+            return user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+        }
+
+        public string GetCurrentUserFullName()
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
+
+            if (user == null || !user.Identity.IsAuthenticated)
+                return string.Empty;  
+
+            var fullNameClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+
+            return fullNameClaim?.Value ?? string.Empty;  
+        }
         #endregion
     }
 

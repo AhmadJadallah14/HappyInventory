@@ -1,18 +1,18 @@
-﻿using HappyInventory.Data.Repositories;
-using HappyInventory.Helpers.Logging;
+﻿using HappyInventory.API.Seeders;
+using HappyInventory.Data.Repositories;
 using HappyInventory.Models.Models.Identity;
+using HappyInventory.Models.Models.Warehouses;
+using HappyInventory.Services.CountryService.CounrtySeeder;
 using HappyInventory.Services.JwtService;
 using HappyInventory.Services.JwtService.Interface;
+using HappyInventory.Services.LogService;
 using HappyInventory.Services.UserService;
 using HappyInventory.Services.UserService.SeedData;
+using HappyInventory.Services.WarehouseService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Serilog.Events;
-using Serilog;
-using System.Reflection;
 using System.Text;
-using HappyInventory.Services.LogService;
 
 namespace HappyInventory.API.Configuration
 {
@@ -20,10 +20,20 @@ namespace HappyInventory.API.Configuration
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.Scan(scan => scan
+                    .FromAssemblyOf<IRepository<Warehouse>>()
+                    .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>)))
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime());
+
             services.AddScoped<IRepository<User>, Repository<User>>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserSeeder, UserSeeder>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IWarehouseService, WarehouseService>() ;
+            services.AddScoped<ICountrySeeder, CountrySeeder>();
+            services.AddScoped<DatabaseSeeder>();
+
             services.AddSingleton<ILogsService, LogsService>();
 
             return services;

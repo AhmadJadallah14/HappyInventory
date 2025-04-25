@@ -12,6 +12,7 @@ namespace HappyInventory.Helpers.AppConstant
         public const string PasswordChangedSuccessfully = "Password changed successfully";
         public const string UserUpdatedSuccessfully = "User updated successfully";
         public const string UserDeletedSuccessfully = "User deleted successfully";
+        public const string WarehouseCreatedSuccessfully = "Warehouse Created Successfully";
 
         // Error messages
         public const string ErrorInvalidCredentials = "Invalid credentials";
@@ -20,6 +21,7 @@ namespace HappyInventory.Helpers.AppConstant
         public const string ErrorFailedToCreateUser = "Failed to create user";
         public const string UserAlreadyExist = "User Already Exist";
         public const string InternalServerError = "Internal Server Error";
+        public const string InvalidCountry = "Invalid Country";
 
 
         // Other messages

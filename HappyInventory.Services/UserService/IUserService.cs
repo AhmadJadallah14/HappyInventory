@@ -12,5 +12,7 @@ namespace HappyInventory.Services.UserService
         Task<ApiResponse<string>> EditUser(UpdateUserDto dto);
         Task<ApiResponse<string>> DeleteUser(int userId);
         Task<ApiResponse<string>> ChangePassword(ChangePasswordDto dto);
+        string GetCurrentUserEmail();
+        string GetCurrentUserFullName();
     }
 }

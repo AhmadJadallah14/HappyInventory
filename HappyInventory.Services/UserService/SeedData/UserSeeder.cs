@@ -22,7 +22,6 @@ namespace HappyInventory.Services.UserService.SeedData
 
             if (defaultUser == null)
             {
-                // Create the default admin user
                 defaultUser = new User
                 {
                     FullName = "Admin User",

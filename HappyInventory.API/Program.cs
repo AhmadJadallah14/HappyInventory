@@ -1,9 +1,9 @@
 using AutoMapper;
 using HappyInventory.API.Configuration;
+using HappyInventory.API.Seeders;
 using HappyInventory.Data.Context;
 using HappyInventory.Helpers.Middleware;
 using HappyInventory.Models.Mapper;
-using HappyInventory.Services.UserService.SeedData;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,14 +26,16 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var userSeeder = services.GetRequiredService<IUserSeeder>();
-    await userSeeder.SeedDefaultUserAsync();
+
+    var databaseSeeder = services.GetRequiredService<DatabaseSeeder>();
+    await databaseSeeder.SeedDataAsync();
 }
 if (app.Environment.IsDevelopment())
 {
