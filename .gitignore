@@ -13,3 +13,7 @@
 /HappyInventory.Services/obj
 /.vs/ProjectEvaluation
 /.vs
+/HappyInventory.API/HappyInventory.API.csproj
+/HappyInventory.API/HappyWarehouse.db
+/HappyInventory.API/HappyWarehouse.db-shm
+/HappyInventory.API/HappyWarehouse.db-wal
