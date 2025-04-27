@@ -52,9 +52,9 @@ namespace HappyInventory.API.Controllers
 
         [HttpGet("get-all-users")]
         [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Management)}")]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers(int pageIndex ,  int pageSize)
         {
-            var result = await _userService.GetAllUsersAsync();
+            var result = await _userService.GetAllUsersAsync(pageIndex, pageSize);
 
             return result.StatusCode == HttpStatusCode.OK
               ? Ok(result)

@@ -13,6 +13,7 @@ namespace HappyInventory.Helpers.AppConstant
         public const string UserUpdatedSuccessfully = "User updated successfully";
         public const string UserDeletedSuccessfully = "User deleted successfully";
         public const string WarehouseCreatedSuccessfully = "Warehouse Created Successfully";
+        public const string SuccessWarehouseFetched = "Success Warehouse Fetched";
 
         // Error messages
         public const string ErrorInvalidCredentials = "Invalid credentials";

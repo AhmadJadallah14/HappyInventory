@@ -24,7 +24,10 @@ namespace HappyInventory.Data.Repositories
         {
             return await _dbSet.ToListAsync();
         }
-
+        public  IQueryable<T> GetAllAsQueryable()
+        {
+            return  _dbSet.AsQueryable();
+        }
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
             return await _dbSet.Where(predicate).ToListAsync();

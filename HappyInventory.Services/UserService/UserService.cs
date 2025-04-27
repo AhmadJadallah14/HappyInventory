@@ -5,6 +5,7 @@ using HappyInventory.Helpers.Enum;
 using HappyInventory.Helpers.Helper;
 using HappyInventory.Models.DTOs.User;
 using HappyInventory.Models.Models.Identity;
+using HappyInventory.Models.PaginationHelper;
 using HappyInventory.Models.Response;
 using HappyInventory.Services.JwtService.Interface;
 using Microsoft.AspNetCore.Http;
@@ -101,19 +102,30 @@ namespace HappyInventory.Services.UserService
                 null, HttpStatusCode.OK);
         }
 
-        public async Task<ApiResponse<List<UserDto>>> GetAllUsersAsync()
+        public async Task<ApiResponse<PaginatedResponse<UserDto>>> GetAllUsersAsync(int pageIndex, int pageSize)
         {
-            var users = await _context.Users.ToListAsync();
-            var userDtos = _mapper.Map<List<UserDto>>(users);
+            var query = _context.Users.AsQueryable().OrderByDescending(u =>  u.Id);
 
-            return new ApiResponse<List<UserDto>>(
+            var paginatedResult = await PaginationHelper.GetPaginatedResultAsync(query, pageIndex, pageSize);
+
+            var userDtos = _mapper.Map<List<UserDto>>(paginatedResult.Data);
+
+            return new ApiResponse<PaginatedResponse<UserDto>>(
                 true,
-                userDtos,
+                new PaginatedResponse<UserDto>
+                {
+                    Data = userDtos,
+                    TotalRecords = paginatedResult.TotalRecords,
+                    TotalPages = paginatedResult.TotalPages,
+                    CurrentPage = paginatedResult.CurrentPage,
+                    PageSize = paginatedResult.PageSize
+                },
                 ResponseMessages.SuccessUserFetched,
                 null,
                 HttpStatusCode.OK
             );
         }
+
 
         public async Task<ApiResponse<string>> EditUser(UpdateUserDto dto)
         {

@@ -12,5 +12,7 @@ namespace HappyInventory.Data.Repositories
         Task UpdateAsync(T entity);
         Task DeleteAsync(int id);
         Task SaveAsync();
+
+        IQueryable<T> GetAllAsQueryable();
     }
 }

@@ -7,6 +7,17 @@ using HappyInventory.Models.Mapper;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowDynamicOrigins", policyBuilder =>
+    {
+        policyBuilder.WithOrigins(allowedOrigins) 
+            .AllowAnyHeader() 
+            .AllowAnyMethod();
+    });
+});
 builder.Services.AddControllers();
 
 var configuration = new ConfigurationBuilder()
@@ -29,6 +40,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+
+app.UseCors("AllowDynamicOrigins");
 
 using (var scope = app.Services.CreateScope())
 {
